@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Car,
   Pill,
@@ -6,22 +7,67 @@ import {
   MapPin,
   Store,
   Megaphone,
-  // Using available icons
   Navigation,
   Bus,
   CalendarDays,
+  X,
 } from "lucide-react";
 
 const modules = [
-  { icon: Car, label: "Otopark", desc: "Yakındaki otopark alanlarını anında bulun" },
-  { icon: Pill, label: "Nöbetçi Eczane", desc: "7/24 açık eczanelere ulaşın" },
-  { icon: UtensilsCrossed, label: "Ne Yenir?", desc: "En iyi restoranları keşfedin" },
-  { icon: MapPin, label: "Gezilecek Yerler", desc: "İzmir'in turistik noktaları" },
-  { icon: Store, label: "Esnaf", desc: "Yerel işletmeleri destekleyin" },
-  { icon: Megaphone, label: "Reklam", desc: "İşletmenizi tanıtın" },
-  { icon: Navigation, label: "Taksi", desc: "Hızlıca taksi çağırın" },
-  { icon: Bus, label: "Ulaşım", desc: "Toplu taşıma rotalarını görün" },
-  { icon: CalendarDays, label: "Etkinlik", desc: "Şehirdeki etkinlikleri takip edin" },
+  {
+    icon: Car,
+    label: "Otopark",
+    desc: "Yakındaki otopark alanlarını anında bulun",
+    detail: "Cepte İzmir Otopark modülü sayesinde İzmir genelindeki açık ve kapalı otoparkları harita üzerinden görüntüleyebilir, doluluk oranlarını anlık takip edebilir ve ücret karşılaştırması yapabilirsiniz. Park yerinizi kaydedin, sürenizi takip edin ve en uygun fiyatlı otopark seçeneklerini keşfedin.",
+  },
+  {
+    icon: Pill,
+    label: "Nöbetçi Eczane",
+    desc: "7/24 açık eczanelere ulaşın",
+    detail: "Gece yarısı ya da bayram günlerinde bile en yakın nöbetçi eczaneyi saniyeler içinde bulun. Konum bazlı arama, yol tarifi alma ve eczane iletişim bilgilerine anında erişim sağlayın. Favori eczanelerinizi kaydederek bildirim alabilirsiniz.",
+  },
+  {
+    icon: UtensilsCrossed,
+    label: "Ne Yenir?",
+    desc: "En iyi restoranları keşfedin",
+    detail: "İzmir'in eşsiz mutfak kültürünü keşfedin! Kullanıcı yorumları, fiyat aralıkları ve mutfak türlerine göre filtreleme yaparak size en uygun mekanı bulun. Günün özel menülerini takip edin, online rezervasyon yapın ve favorilerinizi listeleyin.",
+  },
+  {
+    icon: MapPin,
+    label: "Gezilecek Yerler",
+    desc: "İzmir'in turistik noktaları",
+    detail: "Efes Antik Kenti'nden Kordon'a, Kemeraltı Çarşısı'ndan Alaçatı sokaklarına kadar İzmir'in tüm turistik ve kültürel mekanlarını detaylı bilgi ve fotoğraflarla keşfedin. Kişiselleştirilmiş gezi rotaları oluşturun ve deneyimlerinizi paylaşın.",
+  },
+  {
+    icon: Store,
+    label: "Esnaf",
+    desc: "Yerel işletmeleri destekleyin",
+    detail: "İzmir'in yerel esnafını dijital dünyaya taşıyoruz. Mahallenizin bakkalından, terzisine, tamircisine kadar tüm yerel işletmeleri keşfedin, değerlendirin ve destekleyin. Kampanyalardan ve indirimlerden anında haberdar olun.",
+  },
+  {
+    icon: Megaphone,
+    label: "Reklam",
+    desc: "İşletmenizi tanıtın",
+    detail: "İşletmenizi binlerce İzmirli'ye ulaştırın! Hedef kitle belirleme, bölge bazlı reklam yayınlama ve performans raporları ile dijital reklamcılığın gücünden yararlanın. Uygun fiyatlı reklam paketleri ile yerel pazarda öne çıkın.",
+  },
+  {
+    icon: Navigation,
+    label: "Taksi",
+    desc: "Hızlıca taksi çağırın",
+    detail: "Tek dokunuşla en yakın taksiyi çağırın. Tahmini ücret hesaplama, sürücü puanlama sistemi ve güvenli yolculuk takibi ile İzmir'de ulaşım artık çok kolay. Favori rotalarınızı kaydedin ve kurumsal hesap seçeneklerinden faydalanın.",
+  },
+  {
+    icon: Bus,
+    label: "Ulaşım",
+    desc: "Toplu taşıma rotalarını görün",
+    detail: "ESHOT otobüsleri, İZBAN, metro ve vapur seferlerini anlık olarak takip edin. Rota planlama, aktarma önerileri ve tahmini varış süreleri ile İzmir'in toplu taşıma ağını verimli şekilde kullanın. Kart bakiyenizi kontrol edin ve yükleyin.",
+  },
+  {
+    icon: CalendarDays,
+    label: "Etkinlik",
+    desc: "Şehirdeki etkinlikleri takip edin",
+    detail: "Konserler, festivaller, sergiler, tiyatro gösterileri ve spor etkinlikleri... İzmir'deki tüm etkinlikleri takvim görünümünde takip edin, bilet satın alın ve arkadaşlarınızla paylaşın. İlgi alanlarınıza göre kişiselleştirilmiş etkinlik önerileri alın.",
+  },
 ];
 
 const container = {
@@ -39,6 +85,8 @@ const item = {
 };
 
 const FeaturesSection = () => {
+  const [activeModule, setActiveModule] = useState<string | null>(null);
+
   return (
     <section id="features" className="py-20 md:py-28 bg-muted/50">
       <div className="container mx-auto px-4 md:px-8">
@@ -71,6 +119,7 @@ const FeaturesSection = () => {
             <motion.div
               key={mod.label}
               variants={item}
+              onClick={() => setActiveModule(activeModule === mod.label ? null : mod.label)}
               className="group bg-card rounded-2xl p-6 md:p-8 shadow-card cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover border border-transparent hover:border-primary/20"
             >
               <div className="flex flex-col items-center text-center">
@@ -84,6 +133,24 @@ const FeaturesSection = () => {
                   {mod.desc}
                 </p>
               </div>
+
+              <AnimatePresence>
+                {activeModule === mod.label && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <p className="text-sm text-muted-foreground leading-relaxed text-center">
+                        {mod.detail}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </motion.div>
