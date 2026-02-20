@@ -73,15 +73,17 @@ const FeaturesSection = () => {
               variants={item}
               className="group bg-card rounded-2xl p-6 md:p-8 shadow-card cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover border border-transparent hover:border-primary/20"
             >
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow transition-shadow duration-300">
-                <mod.icon className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
+              <div className="flex flex-col items-center text-center">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl border-2 border-primary/20 gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow transition-shadow duration-300">
+                  <mod.icon className="w-7 h-7 md:w-8 md:h-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-base md:text-lg font-bold text-foreground mb-1">
+                  {mod.label}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {mod.desc}
+                </p>
               </div>
-              <h3 className="text-base md:text-lg font-bold text-foreground mb-1">
-                {mod.label}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {mod.desc}
-              </p>
             </motion.div>
           ))}
         </motion.div>

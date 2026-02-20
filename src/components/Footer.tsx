@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 
 const socials = [
@@ -35,7 +36,10 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-background/10 mt-8 pt-6 text-center">
+        <div className="border-t border-background/10 mt-8 pt-6 text-center space-y-3">
+          <Link to="/gizlilik-politikasi" className="text-background/50 text-sm hover:text-background/80 transition-colors underline underline-offset-4">
+            Gizlilik Politikası
+          </Link>
           <p className="text-background/40 text-sm">
             © 2026 Cepte Teknoloji A.Ş. Tüm hakları saklıdır.
           </p>
