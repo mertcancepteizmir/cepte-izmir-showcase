@@ -87,6 +87,15 @@ const item = {
 const FeaturesSection = () => {
   const [activeModule, setActiveModule] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (activeModule) {
+      const detailElement = document.getElementById("feature-detail");
+      if (detailElement) {
+        detailElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [activeModule]);
+
   return (
     <section id="features" className="py-20 md:py-28 bg-muted/50">
       <div className="container mx-auto px-4 md:px-8">
