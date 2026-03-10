@@ -28,7 +28,7 @@ const ContactSection = () => {
             className="rounded-xl text-base py-6 px-8"
             asChild
           >
-            <a href="https://wa.me/905354171858" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/905382135535" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="w-5 h-5 mr-2" />
               WhatsApp ile İletişime Geçin
             </a>
