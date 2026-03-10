@@ -123,6 +123,7 @@ const FeaturesSection = () => {
               const mod = modules.find((m) => m.label === activeModule)!;
               return (
                 <motion.div
+                  id="feature-detail"
                   key="detail"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
