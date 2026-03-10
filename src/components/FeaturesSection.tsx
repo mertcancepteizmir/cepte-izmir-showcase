@@ -117,74 +117,71 @@ const FeaturesSection = () => {
           </p>
         </motion.div>
 
-        <AnimatePresence mode="wait">
-          {activeModule ? (
-            (() => {
-              const mod = modules.find((m) => m.label === activeModule)!;
-              return (
-                <motion.div
-                  id="feature-detail"
-                  key="detail"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="bg-card rounded-3xl p-8 md:p-12 shadow-card-hover border border-primary/20 relative"
-                >
-                  <button
-                    onClick={() => setActiveModule(null)}
-                    className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted-foreground/10 transition-colors"
-                  >
-                    <X className="w-5 h-5 text-muted-foreground" />
-                  </button>
-
-                  <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
-                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl border-2 border-primary/20 gradient-primary flex items-center justify-center mb-6 shadow-glow">
-                      <mod.icon className="w-10 h-10 md:w-12 md:h-12 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">
-                      {mod.label}
-                    </h3>
-                    <p className="text-base text-muted-foreground mb-6">{mod.desc}</p>
-                    <div className="w-16 h-1 rounded-full gradient-primary mb-6" />
-                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                      {mod.detail}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })()
-          ) : (
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 md:gap-6"
+        >
+          {modules.map((mod) => (
             <motion.div
-              key="grid"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-50px" }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 md:gap-6"
+              key={mod.label}
+              variants={item}
+              onClick={() => setActiveModule(activeModule === mod.label ? null : mod.label)}
+              className={`group bg-card rounded-2xl p-6 md:p-8 shadow-card cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover border ${activeModule === mod.label ? 'border-primary/40 shadow-card-hover' : 'border-transparent hover:border-primary/20'}`}
             >
-              {modules.map((mod) => (
-                <motion.div
-                  key={mod.label}
-                  variants={item}
-                  onClick={() => setActiveModule(mod.label)}
-                  className="group bg-card rounded-2xl p-6 md:p-8 shadow-card cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover border border-transparent hover:border-primary/20"
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl border-2 border-primary/20 gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow transition-shadow duration-300">
-                      <mod.icon className="w-7 h-7 md:w-8 md:h-8 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-bold text-foreground mb-1">
-                      {mod.label}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {mod.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl border-2 border-primary/20 gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow transition-shadow duration-300">
+                  <mod.icon className="w-7 h-7 md:w-8 md:h-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-base md:text-lg font-bold text-foreground mb-1">
+                  {mod.label}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {mod.desc}
+                </p>
+              </div>
             </motion.div>
-          )}
+          ))}
+        </motion.div>
+
+        <AnimatePresence>
+          {activeModule && (() => {
+            const mod = modules.find((m) => m.label === activeModule)!;
+            return (
+              <motion.div
+                id="feature-detail"
+                key="detail"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="bg-card rounded-3xl p-8 md:p-12 shadow-card-hover border border-primary/20 relative mt-6"
+              >
+                <button
+                  onClick={() => setActiveModule(null)}
+                  className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted-foreground/10 transition-colors"
+                >
+                  <X className="w-5 h-5 text-muted-foreground" />
+                </button>
+
+                <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl border-2 border-primary/20 gradient-primary flex items-center justify-center mb-6 shadow-glow">
+                    <mod.icon className="w-10 h-10 md:w-12 md:h-12 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">
+                    {mod.label}
+                  </h3>
+                  <p className="text-base text-muted-foreground mb-6">{mod.desc}</p>
+                  <div className="w-16 h-1 rounded-full gradient-primary mb-6" />
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    {mod.detail}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
       </div>
     </section>
