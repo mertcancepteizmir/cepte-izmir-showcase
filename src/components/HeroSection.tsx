@@ -42,10 +42,6 @@ const HeroSection = () => {
                 <a href="#contact">Partnerimiz Olun</a>
               </Button>
             </div>
-              <Button variant="gradient" size="lg" className="text-base px-8 py-6 rounded-xl" asChild>
-                <a href="#contact">Partnerimiz Olun</a>
-              </Button>
-            </div>
           </motion.div>
 
           {/* Right - Phone Mockup */}
