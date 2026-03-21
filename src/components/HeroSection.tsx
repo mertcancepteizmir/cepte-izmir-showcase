@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import PartnerFormDialog from "@/components/PartnerFormDialog";
 import phoneMockup from "@/assets/app-screenshot.png";
 
 const HeroSection = () => {
