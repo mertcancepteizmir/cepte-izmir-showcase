@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 
 const socials = [
-  { icon: Instagram, href: "https://www.instagram.com/cepte.izmir?igsh=MXM3dGUwNG5xeGN4bA==", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/mertcan-karaduman-35932b390?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", label: "LinkedIn" },
-  { icon: Facebook, href: "https://www.facebook.com/share/1CRpzwy6jA/", label: "Facebook" },
+  { icon: Instagram, href: "https://www.instagram.com/cepte.izmir", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/mertcan-karaduman-35932b390", label: "LinkedIn" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1CK262ybLr/", label: "Facebook" },
 ];
 
 const Footer = () => {
