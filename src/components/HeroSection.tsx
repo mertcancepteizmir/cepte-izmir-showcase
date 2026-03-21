@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import PartnerFormDialog from "@/components/PartnerFormDialog";
 import phoneMockup from "@/assets/app-screenshot.png";
 
 const HeroSection = () => {
@@ -38,9 +39,11 @@ const HeroSection = () => {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <Button variant="gradient" size="lg" className="text-base px-8 py-6 rounded-xl" asChild>
-                <a href="#contact">Partnerimiz Olun</a>
-              </Button>
+              <PartnerFormDialog>
+                <Button variant="gradient" size="lg" className="text-base px-8 py-6 rounded-xl">
+                  Partnerimiz Olun
+                </Button>
+              </PartnerFormDialog>
             </div>
           </motion.div>
 
