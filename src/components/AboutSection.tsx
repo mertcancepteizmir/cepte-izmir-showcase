@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import izmirCityscape from "@/assets/izmir-cityscape.jpg";
+import heroMockup1 from "@/assets/hero-mockup-1.png";
+import heroMockup2 from "@/assets/hero-mockup-2.png";
 
 const modules = [
   { title: "Esnaf", desc: "İhtiyacınız olan her türlü ürün ve hizmet için konumunuza en yakın, güvenilir yerel esnafı saniyeler içinde haritada bularak zaman kazanın." },
