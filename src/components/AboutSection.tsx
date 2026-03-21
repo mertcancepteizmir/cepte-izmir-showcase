@@ -40,14 +40,18 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden shadow-card lg:sticky lg:top-24"
+            className="flex gap-4 items-center justify-center lg:sticky lg:top-24"
           >
             <img
-              src={izmirCityscape}
-              alt="İzmir manzarası"
-              className="w-full h-72 md:h-96 object-cover"
+              src={heroMockup1}
+              alt="Cepte İzmir Uygulama Görsel 1"
+              className="w-1/2 max-w-[280px] rounded-2xl shadow-card"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+            <img
+              src={heroMockup2}
+              alt="Cepte İzmir Uygulama Görsel 2"
+              className="w-1/2 max-w-[280px] rounded-2xl shadow-card"
+            />
           </motion.div>
 
           {/* Text Content */}
