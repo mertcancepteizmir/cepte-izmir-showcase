@@ -26,7 +26,34 @@
     <script type="module">
       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
       createChat({
-        webhookUrl: 'https://canmert.app.n8n.cloud/webhook/f54f32b8-54d0-4926-90f2-cfa02da86d72/chat'
+        webhookUrl: 'https://canmert.app.n8n.cloud/webhook/f54f32b8-54d0-4926-90f2-cfa02da86d72/chat',
+        showWelcomeScreen: true,
+        initialMessages: [
+          'Merhaba! 👋',
+          'Cepte İzmir yapay zeka asistanına hoş geldiniz. Uygulamamız veya hizmetlerimiz hakkında size nasıl yardımcı olabilirim?'
+        ],
+        i18n: {
+          en: {
+            title: 'Cepte İzmir Destek',
+            subtitle: 'Size 7/24 yardımcı olmak için buradayız.',
+            getStarted: 'Sohbete Başla',
+            inputPlaceholder: 'Sorunuzu buraya yazın...',
+          },
+        },
+        theme: {
+          vars: {
+            '--chat--header--background': '#1E88E5',
+            '--chat--header--color': '#FFFFFF',
+            '--chat--message--user--background': '#1E88E5',
+            '--chat--message--user--color': '#FFFFFF',
+            '--chat--message--bot--background': '#F3F4F6',
+            '--chat--message--bot--color': '#333333',
+            '--chat--toggle--background': '#1E88E5',
+            '--chat--toggle--color': '#FFFFFF',
+            '--chat--powered-by--color': '#9CA3AF',
+            '--chat--powered-by--link-color': '#1E88E5',
+          },
+        },
       });
     </script>
   </body>
