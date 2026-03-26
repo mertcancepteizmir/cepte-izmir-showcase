@@ -22,5 +22,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+      createChat({
+        webhookUrl: 'https://canmert.app.n8n.cloud/webhook/f54f32b8-54d0-4926-90f2-cfa02da86d72/chat'
+      });
+    </script>
   </body>
 </html>
