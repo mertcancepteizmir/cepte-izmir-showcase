@@ -23,6 +23,126 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <style>
+      /* Apple-style n8n chat overrides */
+      .n8n-chat .chat-toggle {
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #5BB1FF 0%, #2688F5 50%, #1a6fd4 100%) !important;
+        box-shadow: 0 6px 24px rgba(38, 136, 245, 0.45), 0 2px 8px rgba(0,0,0,0.1) !important;
+        border: none !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        backdrop-filter: blur(10px) !important;
+      }
+      .n8n-chat .chat-toggle:hover {
+        transform: scale(1.08) !important;
+        box-shadow: 0 8px 32px rgba(38, 136, 245, 0.55), 0 4px 12px rgba(0,0,0,0.15) !important;
+      }
+      .n8n-chat .chat-toggle:active {
+        transform: scale(0.96) !important;
+      }
+      .n8n-chat .chat-toggle svg {
+        width: 26px !important;
+        height: 26px !important;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)) !important;
+      }
+
+      .n8n-chat .chat-window {
+        border-radius: 20px !important;
+        overflow: hidden !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif !important;
+      }
+
+      .n8n-chat .chat-header {
+        background: linear-gradient(135deg, #2688F5 0%, #1a6fd4 100%) !important;
+        padding: 20px 24px !important;
+        border-bottom: none !important;
+      }
+      .n8n-chat .chat-header .chat-title {
+        font-weight: 700 !important;
+        font-size: 17px !important;
+        letter-spacing: -0.2px !important;
+      }
+      .n8n-chat .chat-header .chat-subtitle {
+        font-weight: 400 !important;
+        font-size: 13px !important;
+        opacity: 0.85 !important;
+      }
+
+      .n8n-chat .chat-body {
+        background: #FAFBFC !important;
+      }
+
+      .n8n-chat .chat-message-bot .chat-message-body {
+        background: #FFFFFF !important;
+        color: #1d1d1f !important;
+        border-radius: 18px 18px 18px 6px !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
+        font-size: 14.5px !important;
+        line-height: 1.5 !important;
+        border: 1px solid rgba(0,0,0,0.04) !important;
+      }
+      .n8n-chat .chat-message-user .chat-message-body {
+        background: linear-gradient(135deg, #5BB1FF 0%, #2688F5 100%) !important;
+        color: #FFFFFF !important;
+        border-radius: 18px 18px 6px 18px !important;
+        box-shadow: 0 2px 8px rgba(38, 136, 245, 0.3) !important;
+        font-size: 14.5px !important;
+        line-height: 1.5 !important;
+      }
+
+      .n8n-chat .chat-input {
+        border-radius: 24px !important;
+        border: 1.5px solid #E5E7EB !important;
+        background: #FFFFFF !important;
+        font-size: 14.5px !important;
+        padding: 12px 20px !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      .n8n-chat .chat-input:focus {
+        border-color: #5BB1FF !important;
+        box-shadow: 0 0 0 3px rgba(91, 177, 255, 0.15) !important;
+        outline: none !important;
+      }
+
+      .n8n-chat .chat-input-send-button {
+        background: linear-gradient(135deg, #5BB1FF 0%, #2688F5 100%) !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        border: none !important;
+        transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+      }
+      .n8n-chat .chat-input-send-button:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 2px 8px rgba(38, 136, 245, 0.4) !important;
+      }
+
+      .n8n-chat .chat-welcome-screen {
+        background: linear-gradient(180deg, #2688F5 0%, #1a6fd4 100%) !important;
+      }
+      .n8n-chat .chat-welcome-screen .chat-get-started-button {
+        background: rgba(255,255,255,0.2) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255,255,255,0.3) !important;
+        border-radius: 14px !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+        padding: 14px 28px !important;
+        transition: all 0.2s ease !important;
+      }
+      .n8n-chat .chat-welcome-screen .chat-get-started-button:hover {
+        background: rgba(255,255,255,0.35) !important;
+      }
+
+      .n8n-chat .chat-footer {
+        background: #FAFBFC !important;
+        border-top: 1px solid #F0F1F3 !important;
+      }
+    </style>
     <script type="module">
       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
       createChat({
@@ -42,16 +162,18 @@
         },
         theme: {
           vars: {
-            '--chat--header--background': '#1E88E5',
+            '--chat--header--background': 'linear-gradient(135deg, #2688F5, #1a6fd4)',
             '--chat--header--color': '#FFFFFF',
-            '--chat--message--user--background': '#1E88E5',
+            '--chat--message--user--background': '#2688F5',
             '--chat--message--user--color': '#FFFFFF',
-            '--chat--message--bot--background': '#F3F4F6',
-            '--chat--message--bot--color': '#333333',
-            '--chat--toggle--background': '#1E88E5',
+            '--chat--message--bot--background': '#FFFFFF',
+            '--chat--message--bot--color': '#1d1d1f',
+            '--chat--toggle--background': '#2688F5',
             '--chat--toggle--color': '#FFFFFF',
             '--chat--powered-by--color': '#9CA3AF',
-            '--chat--powered-by--link-color': '#1E88E5',
+            '--chat--powered-by--link-color': '#2688F5',
+            '--chat--window--width': '380px',
+            '--chat--window--height': '580px',
           },
         },
       });
