@@ -72,9 +72,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="gradient" size="sm" className="mt-2 w-full" asChild>
-              <a href="#contact">Partnerimiz Olun</a>
-            </Button>
+            <PartnerFormDialog>
+              <Button variant="gradient" size="sm" className="mt-2 w-full">Partnerimiz Olun</Button>
+            </PartnerFormDialog>
           </motion.div>
         )}
       </div>
