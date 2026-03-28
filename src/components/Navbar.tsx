@@ -40,9 +40,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="gradient" size="sm" asChild>
-              <a href="#contact">Partnerimiz Olun</a>
-            </Button>
+            <PartnerFormDialog>
+              <Button variant="gradient" size="sm">Partnerimiz Olun</Button>
+            </PartnerFormDialog>
           </div>
 
           {/* Mobile Toggle */}
