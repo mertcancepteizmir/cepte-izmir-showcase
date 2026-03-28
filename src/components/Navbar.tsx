@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PartnerFormDialog from "@/components/PartnerFormDialog";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
