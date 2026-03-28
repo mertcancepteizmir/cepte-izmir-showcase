@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PartnerFormDialog from "@/components/PartnerFormDialog";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,9 +40,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="gradient" size="sm" asChild>
-              <a href="#contact">Partnerimiz Olun</a>
-            </Button>
+            <PartnerFormDialog>
+              <Button variant="gradient" size="sm">Partnerimiz Olun</Button>
+            </PartnerFormDialog>
           </div>
 
           {/* Mobile Toggle */}
@@ -71,9 +72,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="gradient" size="sm" className="mt-2 w-full" asChild>
-              <a href="#contact">Partnerimiz Olun</a>
-            </Button>
+            <PartnerFormDialog>
+              <Button variant="gradient" size="sm" className="mt-2 w-full">Partnerimiz Olun</Button>
+            </PartnerFormDialog>
           </motion.div>
         )}
       </div>
