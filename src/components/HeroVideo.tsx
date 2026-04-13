@@ -51,7 +51,7 @@ const HeroVideo = () => {
         <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
           <video
             ref={videoRef}
-            src="/videos/hero-video.mp4"
+            src="/videos/hero-video.webm"
             className="w-full h-auto"
             playsInline
             loop
