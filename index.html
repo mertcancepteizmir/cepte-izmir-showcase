@@ -26,6 +26,30 @@
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
     <style>
       /* Apple-style n8n chat overrides */
+      @keyframes chat-heartbeat {
+        0%, 100% { transform: scale(1); }
+        15% { transform: scale(1.12); }
+        30% { transform: scale(1); }
+        45% { transform: scale(1.08); }
+        60% { transform: scale(1); }
+      }
+      @keyframes chat-heartbeat-ring {
+        0% { transform: scale(1); opacity: 0.55; }
+        80% { transform: scale(1.6); opacity: 0; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+      @keyframes chat-icon-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes chat-bob {
+        0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+        40% { transform: translateY(-14px) scale(1.05); opacity: 0.6; }
+        50% { transform: translateY(-18px) scale(1.05); opacity: 0; }
+        60% { transform: translateY(14px) scale(1.05); opacity: 0; }
+        75% { transform: translateY(6px) scale(1); opacity: 0.7; }
+      }
+
       .n8n-chat .chat-toggle,
       .n8n-chat .chat-window-toggle,
       .chat-toggle,
@@ -36,20 +60,36 @@
         background: linear-gradient(180deg, #5BB1FF 0%, #2688F5 100%) !important;
         box-shadow: 0 6px 24px rgba(38, 136, 245, 0.45), 0 2px 8px rgba(0,0,0,0.1) !important;
         border: none !important;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         backdrop-filter: blur(10px) !important;
+        position: fixed !important;
+        animation: chat-heartbeat 1.6s ease-in-out infinite !important;
+      }
+      /* Pulsing ring (kalp atışı dalga katmanı) */
+      .n8n-chat .chat-toggle::before,
+      .n8n-chat .chat-window-toggle::before,
+      .chat-toggle::before,
+      .chat-window-toggle::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        border-radius: 50% !important;
+        background: linear-gradient(180deg, #5BB1FF 0%, #2688F5 100%) !important;
+        z-index: -1 !important;
+        animation: chat-heartbeat-ring 1.6s ease-out infinite !important;
       }
       .n8n-chat .chat-toggle:hover,
       .n8n-chat .chat-window-toggle:hover,
       .chat-toggle:hover,
       .chat-window-toggle:hover {
-        transform: scale(1.08) !important;
         box-shadow: 0 8px 32px rgba(38, 136, 245, 0.55), 0 4px 12px rgba(0,0,0,0.15) !important;
+        animation: chat-bob 1s ease-in-out infinite !important;
       }
       .n8n-chat .chat-toggle:active,
       .n8n-chat .chat-window-toggle:active,
       .chat-toggle:active,
       .chat-window-toggle:active {
+        animation: none !important;
         transform: scale(0.96) !important;
       }
       .n8n-chat .chat-toggle svg,
@@ -59,6 +99,30 @@
         width: 26px !important;
         height: 26px !important;
         filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)) !important;
+        transition: transform 0.3s ease !important;
+        transform-origin: center !important;
+      }
+      .n8n-chat .chat-toggle:hover svg,
+      .n8n-chat .chat-window-toggle:hover svg,
+      .chat-toggle:hover svg,
+      .chat-window-toggle:hover svg {
+        animation: chat-icon-spin 1.2s linear infinite !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .n8n-chat .chat-toggle,
+        .n8n-chat .chat-window-toggle,
+        .chat-toggle,
+        .chat-window-toggle,
+        .n8n-chat .chat-toggle::before,
+        .n8n-chat .chat-window-toggle::before,
+        .chat-toggle::before,
+        .chat-window-toggle::before,
+        .n8n-chat .chat-toggle:hover svg,
+        .n8n-chat .chat-window-toggle:hover svg,
+        .chat-toggle:hover svg,
+        .chat-window-toggle:hover svg {
+          animation: none !important;
+        }
       }
 
       .n8n-chat .chat-window {
