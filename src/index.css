@@ -100,3 +100,10 @@
     box-shadow: var(--shadow-glow);
   }
 }
+
+/* n8n chat: hide its default floating toggle so only our custom button is visible */
+.n8n-chat .chat-toggle,
+#n8n-chat-toggle,
+.n8n-chat-toggle {
+  display: none !important;
+}
