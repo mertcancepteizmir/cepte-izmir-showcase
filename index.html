@@ -26,24 +26,36 @@
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
     <style>
       /* Apple-style n8n chat overrides */
-      .n8n-chat .chat-toggle {
+      .n8n-chat .chat-toggle,
+      .n8n-chat .chat-window-toggle,
+      .chat-toggle,
+      .chat-window-toggle {
         width: 60px !important;
         height: 60px !important;
         border-radius: 50% !important;
-        background: linear-gradient(135deg, #5BB1FF 0%, #2688F5 50%, #1a6fd4 100%) !important;
+        background: linear-gradient(180deg, #5BB1FF 0%, #2688F5 100%) !important;
         box-shadow: 0 6px 24px rgba(38, 136, 245, 0.45), 0 2px 8px rgba(0,0,0,0.1) !important;
         border: none !important;
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         backdrop-filter: blur(10px) !important;
       }
-      .n8n-chat .chat-toggle:hover {
+      .n8n-chat .chat-toggle:hover,
+      .n8n-chat .chat-window-toggle:hover,
+      .chat-toggle:hover,
+      .chat-window-toggle:hover {
         transform: scale(1.08) !important;
         box-shadow: 0 8px 32px rgba(38, 136, 245, 0.55), 0 4px 12px rgba(0,0,0,0.15) !important;
       }
-      .n8n-chat .chat-toggle:active {
+      .n8n-chat .chat-toggle:active,
+      .n8n-chat .chat-window-toggle:active,
+      .chat-toggle:active,
+      .chat-window-toggle:active {
         transform: scale(0.96) !important;
       }
-      .n8n-chat .chat-toggle svg {
+      .n8n-chat .chat-toggle svg,
+      .n8n-chat .chat-window-toggle svg,
+      .chat-toggle svg,
+      .chat-window-toggle svg {
         width: 26px !important;
         height: 26px !important;
         filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)) !important;
@@ -163,6 +175,8 @@
         },
         theme: {
           vars: {
+            '--chat--color--primary': '#2688F5',
+            '--chat--color--primary-shade-50': '#1a6fd4',
             '--chat--header--background': 'linear-gradient(135deg, #2688F5, #1a6fd4)',
             '--chat--header--color': '#FFFFFF',
             '--chat--message--user--background': '#2688F5',
@@ -170,6 +184,7 @@
             '--chat--message--bot--background': '#FFFFFF',
             '--chat--message--bot--color': '#1d1d1f',
             '--chat--toggle--background': '#2688F5',
+            '--chat--toggle--hover--background': '#1a6fd4',
             '--chat--toggle--color': '#FFFFFF',
             '--chat--powered-by--color': '#9CA3AF',
             '--chat--powered-by--link-color': '#2688F5',

@@ -5,7 +5,6 @@ import AboutSection from "@/components/AboutSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import ChatAssistantButton from "@/components/ChatAssistantButton";
 
 const Index = () => {
   return (
@@ -17,7 +16,6 @@ const Index = () => {
       <AboutSection />
       <ContactSection />
       <Footer />
-      <ChatAssistantButton />
     </div>
   );
 };
