@@ -26,13 +26,13 @@ const HeroSection = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6"
             >
-              🚀 İzmir'in Anahtarı Cebinizde
+              🚀 Yakında Sizlerle
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground mb-6">
               İzmir'in Yeni{" "}
               <span className="gradient-text">Süper Uygulaması</span>{" "}
-              Sizlerle
+              Geliyor
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
