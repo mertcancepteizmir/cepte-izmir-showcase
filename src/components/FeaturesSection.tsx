@@ -89,10 +89,14 @@ const FeaturesSection = () => {
 
   useEffect(() => {
     if (activeModule) {
-      const detailElement = document.getElementById("feature-detail");
-      if (detailElement) {
-        detailElement.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+      requestAnimationFrame(() => {
+        const detailElement = document.getElementById("feature-detail");
+        if (detailElement) {
+          const navbarOffset = 90;
+          const top = detailElement.getBoundingClientRect().top + window.scrollY - navbarOffset;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      });
     }
   }, [activeModule]);
 
