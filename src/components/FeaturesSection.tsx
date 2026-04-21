@@ -101,7 +101,7 @@ const FeaturesSection = () => {
   }, [activeModule]);
 
   return (
-    <section id="features" className="py-20 md:py-28 bg-muted/50">
+    <section id="features" className="pt-20 md:pt-28 pb-48 md:pb-64 bg-muted/50">
       <div className="container mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
