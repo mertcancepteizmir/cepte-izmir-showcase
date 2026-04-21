@@ -62,7 +62,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: "Cepte İzmir <onboarding@resend.dev>",
-        to: ["destek@cepteizmir.com"],
+        to: ["bilgi@cepteizmir.com"],
         subject: `Yeni Partner Başvurusu: ${escapeHtml(firstName)} ${escapeHtml(lastName)}`,
         html: emailHtml,
       }),

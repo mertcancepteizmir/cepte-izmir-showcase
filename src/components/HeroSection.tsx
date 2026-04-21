@@ -30,10 +30,13 @@ const HeroSection = () => {
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground mb-6">
-              İzmir'in Yeni{" "}
-              <span className="gradient-text">Süper Uygulaması</span>{" "}
-              Geliyor
+              İzmir'in Anahtarı{" "}
+              <span className="gradient-text">Cebiniz'de</span>
             </h1>
+
+            <p className="text-lg md:text-xl font-semibold text-foreground/80 mb-4">
+              İzmir'in Yeni Süper Uygulaması Şehir Rehberi Sizlerle...
+            </p>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
               Eczaneden ulaşıma, etkinliklerden esnafa kadar şehrin tüm dinamiklerini tek bir ekranda toplayan akıllı şehir rehberiniz.
