@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import PartnerFormDialog from "@/components/PartnerFormDialog";
+import StoreButtons from "@/components/StoreButtons";
 import phoneMockup from "@/assets/app-screenshot.png";
 
 const HeroSection = () => {
@@ -38,12 +39,16 @@ const HeroSection = () => {
               Eczaneden ulaşıma, etkinliklerden esnafa kadar şehrin tüm dinamiklerini tek bir ekranda toplayan akıllı şehir rehberiniz.
             </p>
 
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
               <PartnerFormDialog>
                 <Button variant="gradient" size="lg" className="text-base px-8 py-6 rounded-xl">
                   Partnerimiz Olun
                 </Button>
               </PartnerFormDialog>
+            </div>
+
+            <div className="mt-8">
+              <StoreButtons align="start" className="lg:!justify-start" />
             </div>
           </motion.div>
 

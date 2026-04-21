@@ -1,11 +1,29 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import StoreButtons from "@/components/StoreButtons";
 
 const ContactSection = () => {
   return (
     <section id="contact" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4 md:px-8">
+        {/* Store Buttons - Above contact */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-3">
+            Cepte İzmir'i <span className="gradient-text">Hemen İndirin</span>
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            Şehrin tüm dinamiklerini cebinize taşıyın.
+          </p>
+          <StoreButtons />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
