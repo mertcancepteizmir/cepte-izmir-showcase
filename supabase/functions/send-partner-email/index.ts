@@ -13,7 +13,7 @@ serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { firstName, lastName, phone, district, description } = body;
+    const { firstName, lastName, phone, district, description, email } = body;
     const sector = body.sector ?? body.city;
 
     if (!firstName || !lastName || !phone || !sector || !district) {
@@ -24,7 +24,7 @@ serve(async (req) => {
     }
 
     // Validate input lengths
-    if (firstName.length > 100 || lastName.length > 100 || phone.length > 20 || sector.length > 100 || district.length > 100 || (description && description.length > 1000)) {
+    if (firstName.length > 100 || lastName.length > 100 || phone.length > 20 || sector.length > 100 || district.length > 100 || (description && description.length > 1000) || (email && email.length > 255)) {
       return new Response(
         JSON.stringify({ error: "Alan uzunluk limitleri aşıldı." }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -48,8 +48,9 @@ serve(async (req) => {
           <tr><td style="padding: 10px; font-weight: bold; color: #333; width: 120px;">İsim:</td><td style="padding: 10px; color: #555;">${escapeHtml(firstName)}</td></tr>
           <tr style="background: #f9f9f9;"><td style="padding: 10px; font-weight: bold; color: #333;">Soyisim:</td><td style="padding: 10px; color: #555;">${escapeHtml(lastName)}</td></tr>
           <tr><td style="padding: 10px; font-weight: bold; color: #333;">Numara:</td><td style="padding: 10px; color: #555;">${escapeHtml(phone)}</td></tr>
-          <tr style="background: #f9f9f9;"><td style="padding: 10px; font-weight: bold; color: #333;">Sektör:</td><td style="padding: 10px; color: #555;">${escapeHtml(sector)}</td></tr>
-          <tr><td style="padding: 10px; font-weight: bold; color: #333;">İlçe:</td><td style="padding: 10px; color: #555;">${escapeHtml(district)}</td></tr>
+          ${email ? `<tr style="background: #f9f9f9;"><td style="padding: 10px; font-weight: bold; color: #333;">Mail:</td><td style="padding: 10px; color: #555;">${escapeHtml(email)}</td></tr>` : ""}
+          <tr${email ? "" : ' style="background: #f9f9f9;"'}><td style="padding: 10px; font-weight: bold; color: #333;">Sektör:</td><td style="padding: 10px; color: #555;">${escapeHtml(sector)}</td></tr>
+          <tr${email ? ' style="background: #f9f9f9;"' : ""}><td style="padding: 10px; font-weight: bold; color: #333;">İlçe:</td><td style="padding: 10px; color: #555;">${escapeHtml(district)}</td></tr>
           ${description ? `<tr style="background: #f9f9f9;"><td style="padding: 10px; font-weight: bold; color: #333; vertical-align: top;">Açıklama:</td><td style="padding: 10px; color: #555;">${escapeHtml(description)}</td></tr>` : ""}
         </table>
         <p style="color: #999; font-size: 12px; margin-top: 30px;">Bu e-posta Cepte İzmir web sitesi partner başvuru formu aracılığıyla gönderilmiştir.</p>

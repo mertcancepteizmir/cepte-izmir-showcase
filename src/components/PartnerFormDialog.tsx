@@ -20,6 +20,7 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
     firstName: "",
     lastName: "",
     phone: "",
+    email: "",
     sector: "",
     district: "",
     description: "",
@@ -37,12 +38,19 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
       return;
     }
 
+    const emailTrimmed = form.email.trim();
+    if (emailTrimmed && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
+      toast.error("Geçerli bir e-posta adresi girin.");
+      return;
+    }
+
     setLoading(true);
     try {
       const payload = {
         firstName: form.firstName.trim(),
         lastName: form.lastName.trim(),
         phone: form.phone.trim(),
+        email: emailTrimmed,
         sector: form.sector.trim(),
         district: form.district.trim(),
         description: form.description.trim(),
@@ -74,7 +82,7 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
       }
 
       toast.success("Başvurunuz başarıyla gönderildi!");
-      setForm({ firstName: "", lastName: "", phone: "", sector: "", district: "", description: "" });
+      setForm({ firstName: "", lastName: "", phone: "", email: "", sector: "", district: "", description: "" });
       setOpen(false);
     } catch (err) {
       console.error("Form gönderim hatası:", err);
@@ -102,9 +110,15 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
               <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} placeholder="Soyisminiz" maxLength={100} />
             </div>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">Numara *</Label>
-            <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder="05XX XXX XX XX" maxLength={20} />
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="phone">Numara *</Label>
+              <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder="05XX XXX XX XX" maxLength={20} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Mail</Label>
+              <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="ornek@mail.com" maxLength={255} />
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
