@@ -11,6 +11,8 @@ interface PartnerFormDialogProps {
   children: React.ReactNode;
 }
 
+const N8N_WEBHOOK_URL = "https://n8n.cepteizmir.xyz/webhook/29f9b778-a4da-4c89-b16a-1b6f94940136";
+
 const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
     firstName: "",
     lastName: "",
     phone: "",
-    city: "",
+    sector: "",
     district: "",
     description: "",
   });
@@ -30,28 +32,49 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.firstName.trim() || !form.lastName.trim() || !form.phone.trim() || !form.city.trim() || !form.district.trim()) {
+    if (!form.firstName.trim() || !form.lastName.trim() || !form.phone.trim() || !form.sector.trim() || !form.district.trim()) {
       toast.error("Lütfen tüm zorunlu alanları doldurun.");
       return;
     }
 
     setLoading(true);
     try {
-      const { error } = await supabase.functions.invoke("send-partner-email", {
+      const payload = {
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        phone: form.phone.trim(),
+        sector: form.sector.trim(),
+        district: form.district.trim(),
+        description: form.description.trim(),
+        submittedAt: new Date().toISOString(),
+      };
+
+      // E-posta gönderimi (mevcut akış - şehir yerine sektör gönderiyoruz)
+      const emailPromise = supabase.functions.invoke("send-partner-email", {
         body: {
-          firstName: form.firstName.trim(),
-          lastName: form.lastName.trim(),
-          phone: form.phone.trim(),
-          city: form.city.trim(),
-          district: form.district.trim(),
-          description: form.description.trim(),
+          ...payload,
+          city: payload.sector, // edge function uyumluluğu için
         },
       });
 
-      if (error) throw error;
+      // n8n webhook tetikleme
+      const webhookPromise = fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const [emailRes, webhookRes] = await Promise.allSettled([emailPromise, webhookPromise]);
+
+      if (emailRes.status === "rejected" || (emailRes.status === "fulfilled" && emailRes.value.error)) {
+        console.error("E-posta gönderim hatası:", emailRes);
+      }
+      if (webhookRes.status === "rejected" || (webhookRes.status === "fulfilled" && !webhookRes.value.ok)) {
+        console.error("Webhook gönderim hatası:", webhookRes);
+      }
 
       toast.success("Başvurunuz başarıyla gönderildi!");
-      setForm({ firstName: "", lastName: "", phone: "", city: "", district: "", description: "" });
+      setForm({ firstName: "", lastName: "", phone: "", sector: "", district: "", description: "" });
       setOpen(false);
     } catch (err) {
       console.error("Form gönderim hatası:", err);
@@ -85,8 +108,8 @@ const PartnerFormDialog = ({ children }: PartnerFormDialogProps) => {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="city">Şehir *</Label>
-              <Input id="city" name="city" value={form.city} onChange={handleChange} placeholder="Şehir" maxLength={100} />
+              <Label htmlFor="sector">Sektör *</Label>
+              <Input id="sector" name="sector" value={form.sector} onChange={handleChange} placeholder="Örn: Restoran, Otopark" maxLength={100} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="district">İlçe *</Label>
