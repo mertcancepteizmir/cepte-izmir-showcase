@@ -66,27 +66,6 @@ const AboutSection = () => {
               Cepte Teknoloji A.Ş. çatısı altında İzmir ile buluşmaya hazırlanan Cepte İzmir, şehrin nabzını tek bir ekranda tutmayı hedefleyen kapsamlı bir dijital şehir rehberidir. İzmir'in eşsiz dinamizmine ayak uyduran yenilikçi bir "Süper App" olarak, günlük yaşamı kolaylaştırmak ve şehrin tüm olanaklarını parmaklarınızın ucuna getirmek için tasarlanmıştır. Gücünü yerel ağlardan ve akıllı konum teknolojilerinden alan uygulamamız, İzmirlilerin ve bu güzel şehri keşfetmek isteyen herkesin en güvenilir dijital yol arkadaşı olmayı amaçlamaktadır.
             </p>
 
-            <div>
-              <h3 className="text-xl font-bold text-foreground mb-4">
-                Kullanıcılarımıza zaman kazandıran ve şehri yaşamayı çok daha pratik hale getiren modüllerimiz şunlardır:
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {modules.map((mod, idx) => (
-                  <motion.div
-                    key={mod.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: idx * 0.05 }}
-                    className="bg-muted/50 rounded-xl p-4"
-                  >
-                    <h4 className="font-bold text-foreground mb-2">{mod.title}</h4>
-                    <p className="text-sm text-muted-foreground">{mod.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
             <div className="grid sm:grid-cols-2 gap-6 pt-4">
               <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-foreground mb-2">Vizyonumuz</h3>
